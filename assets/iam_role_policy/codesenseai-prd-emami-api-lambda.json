@@ -1,0 +1,43 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3ReadProcessedOutput",
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": [
+        "arn:aws:s3:::codesenseai-emami-dev-*",
+        "arn:aws:s3:::codesenseai-emami-dev-*/*",
+        "arn:aws:s3:::codesenseai-emami-prd-*",
+        "arn:aws:s3:::codesenseai-emami-prd-*/*"
+      ]
+    },
+    {
+      "Sid": "DynamoDBTableAccess",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:us-east-1:*:table/codesenseai-emami-dev-*",
+        "arn:aws:dynamodb:us-east-1:*:table/codesenseai-emami-prd-*"
+      ]
+    },
+    {
+      "Sid": "CloudWatchLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:us-east-1:*:log-group:/aws/lambda/codesenseai-emami-dev-*:*",
+        "arn:aws:logs:us-east-1:*:log-group:/aws/lambda/codesenseai-emami-prd-*:*"
+      ]
+    }
+  ]
+}

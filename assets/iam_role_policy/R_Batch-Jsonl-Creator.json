@@ -1,0 +1,56 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockBatchJobs",
+      "Effect": "Allow",
+      "Action": "bedrock:CreateModelInvocationJob",
+      "Resource": [
+        "arn:aws:bedrock:*::model/anthropic.claude-sonnet-4-6",
+        "arn:aws:bedrock:*::model/anthropic.claude-sonnet-4-5-20250929-v1:0"
+      ]
+    },
+    {
+      "Sid": "DynamoDBAccess",
+      "Effect": "Allow",
+      "Action": ["dynamodb:BatchWriteItem", "dynamodb:UpdateItem"],
+      "Resource": [
+        "arn:aws:dynamodb:us-east-1:*:table/codesenseai-emami-dev-*",
+        "arn:aws:dynamodb:us-east-1:*:table/codesenseai-emami-prd-*"
+      ]
+    },
+    {
+      "Sid": "S3ReadWriteAccess",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": [
+        "arn:aws:s3:::codesenseai-emami-dev-*",
+        "arn:aws:s3:::codesenseai-emami-dev-*/*",
+        "arn:aws:s3:::codesenseai-emami-prd-*",
+        "arn:aws:s3:::codesenseai-emami-prd-*/*"
+      ]
+    },
+    {
+      "Sid": "SQSAccess",
+      "Effect": "Allow",
+      "Action": "sqs:SendMessage",
+      "Resource": [
+        "arn:aws:sqs:us-east-1:*:codesenseai-emami-dev-*",
+        "arn:aws:sqs:us-east-1:*:codesenseai-emami-prd-*"
+      ]
+    },
+    {
+      "Sid": "CloudWatchLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "arn:aws:logs:us-east-1:*:log-group:/aws/lambda/codesenseai-emami-dev-*:*",
+        "arn:aws:logs:us-east-1:*:log-group:/aws/lambda/codesenseai-emami-prd-*:*"
+      ]
+    }
+  ]
+}
